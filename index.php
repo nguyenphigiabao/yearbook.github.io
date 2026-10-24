@@ -19,19 +19,9 @@
 </head>
 <body>
 	<div class="page">
-		<header class="title">
-			<h1>Year Book</h1>
-		</header>
-		<navbar class="navbar">
-			<a href="index.php">Home Page</a>
-			<a href="class.php">Class Members</a>
-			<a href="user.php">My profile</a>
-			<a href="gallery.php">Photo Gallery</a>
-			<a href="polls.php">Polls</a>
-			<a href="stories.php">Stories</a>
-		</navbar>
+		
 		<?php
-
+			include 'header.inc.php';
 		?>
 		<section class="signup-wrap">
 			<?php if(!logged_in()){ ?>

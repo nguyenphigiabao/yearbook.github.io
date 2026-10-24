@@ -8,19 +8,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<meta name="description" content="Yearbook [Scoolname]"/>
-	<meta name=viewport content='width=520'>
+	<meta charset="UTF-8"/>
+	<meta name="description" content="Yearbook [Schoolname]"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="favicon.png" type="image/png"/>
-	<title>Yearbook [schoolname]</title>
-	<link rel="stylesheet" href="main.css?" />
+	<title>Year Book - Thành viên lớp</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
 	<script src="main.js"></script>
 </head>
 <body>
 
 	<div class="page">
-	<?php include 'header.inc.php';
-			show_class_mates($con,1);
+	<?php 
+		include 'header.inc.php';
+		show_class_mates($con,1);
 	?>
 		<!--
 			the content

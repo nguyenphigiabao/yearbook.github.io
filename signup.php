@@ -18,21 +18,9 @@
 </head>
 <body>
 	<div class="page">
-		<header class="title">
-			<h1>Year Book</h1>
-		</header>
-
-		<nav class="navbar">
-			<a href="index.php">Home Page</a>
-			<a href="class.php">Class Members</a>
-			<a href="user.php">My profile</a>
-			<a href="gallery.php">Photo Gallery</a>
-			<a href="polls.php">Polls</a>
-			<a href="stories.php">Stories</a>
-		</nav>
-
-		<?php
 		
+		<?php
+			include 'header.inc.php';
 		
 		?>
 		<section class="signup-wrap">
@@ -40,7 +28,7 @@
 			<p class="form-note">Đã có tài khoản? <a href="index.php">Đăng nhập</a></p>
 		</section>
 
-		<footer>-made with love by npgb-</footer>
+		<footer>-cun-</footer>
 	</div>
 
 	

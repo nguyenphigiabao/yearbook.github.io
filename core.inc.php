@@ -3,6 +3,7 @@
 //basic set up for php project, start session so you can use $_SESSION variables, and include the connections
 session_start();
 include 'connect.inc.php';
+include 'images.inc.php';
 
 //redirect to another page
 function redirect($url){
@@ -55,10 +56,10 @@ function log_in($con){
 		$password = $_POST['password'];
 		$password_hash = hash("sha256", $password);
 		//see if there is a user with this email and password combination
-		echo $select_user = "SELECT * FROM user WHERE email='".mysqli_real_escape_string($con,$email)."' AND password='".mysqli_real_escape_string($con,$password_hash)."'";
+		$select_user = "SELECT * FROM user WHERE email='".mysqli_real_escape_string($con,$email)."' AND password='".mysqli_real_escape_string($con,$password_hash)."'";
 		$run = mysqli_query($con, $select_user);
 		if(mysqli_num_rows($run)!=1){
-			echo '<p>Unknown user</p>';
+			echo '<p style="color: red;">Sai mật khẩu hoặc E-mail</p>';
 		}else{
 			$user = mysqli_fetch_assoc($run);
 			//create a session 
@@ -96,18 +97,18 @@ function user_image($user_id,$switch){
 			if($switch==2){
 				if($user_id==$_SESSION['user_id']){
 			$img .=  '<form enctype="multipart/form-data" action="upload_profile_image.php?user_id='.$user_id.'" method="POST" style="display:inline-block;font-size:12px;">
-					Voeg een profielfoto toe (.png, .jpg of .jpeg): <br/><input name="uploaded" type="file" /><br />
+					Thêm ảnh đại diện (.png, .jpg hoặc .jpeg): <br/><input name="uploaded" type="file" /><br />
 					<input type="submit" value="Upload" class="small_button" />
 				</form><br/>'; 
 															 
 			if(isset($_GET['file_error'])){
-					 $img .=  '<p>Sorry, alleen .jpg, .jpeg en .png bestanden zijn toegestaan.</p>';
+					 $img .=  '<p>Xin lỗi, chỉ chấp nhận các tệp có định dạng .jpg, .jpeg và .png.</p>';
 			}
 			if(isset($_GET['size_error'])){
-				 $img .=  '<p>Sorry, het ingeladen bestand is te groot. Max 3mb</p>';
+				 $img .=  '<p>Rất tiếc, tệp được tải lên quá lớn. Dung lượng tối đa là 3MB.</p>';
 			}
 			if(isset($_GET['type_error'])){
-				$img .=  '<p>Het ingeladen bestand is geen afbeelding.</p>';
+				$img .=  '<p>Tệp được tải lên không phải là hình ảnh.</p>';
 			}
 		}
 			}
@@ -119,13 +120,13 @@ function user_image($user_id,$switch){
 function delete_image($url, $id, $extension,$name){
 	$delete = '';
 	if(($_SESSION['user_id']==$id)){
-		$delete .= '<p><a  href="'.$url.'&delete_image='.$id.'"  style="font-size:12px;">Verwijder afbeelding</a></p>';
+		$delete .= '<p><a  href="'.$url.'&delete_image='.$id.'"  style="font-size:12px;">Xóa hình ảnh</a></p>';
 	}
 	
 	if(isset($_GET['delete_image'])&&$_GET['delete_image']==$id&&$_SESSION['user_id']==$id&&$name=='profile'){
 		$file_to_delete = 'uploads/'.$name.'_'.$id.'.'.$extension;
 		if(unlink($file_to_delete)){
-			redirect($url);
+			redirect($url);	
 		}else{
 			$delete .= 'Verwijderen mislukt.';
 		}
